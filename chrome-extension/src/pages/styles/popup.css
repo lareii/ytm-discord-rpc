@@ -1,0 +1,77 @@
+body {
+    background-color: #242424;
+}
+
+.app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+ .checkbox-wrapper-64 input[type="checkbox"] {
+     visibility: hidden;
+     display: none;
+ }
+
+.checkbox-wrapper-64 *,
+.checkbox-wrapper-64 ::after,
+.checkbox-wrapper-64 ::before {
+    box-sizing: border-box;
+}
+
+/* The switch - the box around the slider */
+.checkbox-wrapper-64 .switch {
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 3.5em;
+    height: 2em;
+}
+
+/* Hide default HTML checkbox */
+.checkbox-wrapper-64 .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.checkbox-wrapper-64 .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    border: 1px solid #adb5bd;
+    transition: .4s;
+    border-radius: 30px;
+}
+
+.checkbox-wrapper-64 .slider:before {
+    position: absolute;
+    content: "";
+    height: 1.4em;
+    width: 1.4em;
+    border-radius: 20px;
+    left: 0.27em;
+    bottom: 0.25em;
+    background-color: #adb5bd;
+    transition: .4s;
+}
+
+.checkbox-wrapper-64 input:checked + .slider {
+    background-color: #007bff;
+    border: 1px solid #007bff;
+}
+
+.checkbox-wrapper-64 input:focus + .slider {
+    box-shadow: 0 0 1px #007bff;
+}
+
+.checkbox-wrapper-64 input:checked + .slider:before {
+    transform: translateX(1.4em);
+    background-color: #fff;
+}
