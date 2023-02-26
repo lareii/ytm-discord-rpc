@@ -1,6 +1,6 @@
 import asyncio
 import websockets
-import functools
+import os
 import pypresence
 import json
 import pystray
@@ -10,20 +10,23 @@ from PIL import Image
 connections = []
 
 async def update_presence(rpc, msg):
-    await rpc.update(
-        large_image=msg['thumbnail'],
-        large_text="ytm-discord-rpc",
-        small_image='ytmusic',
-        state="by " + msg['singer'].replace(' - Topic', ''),
-        details=msg['title'],
-        buttons=[
-            {'label': 'Play on YouTube Music', 'url': msg['url']}
-        ]
-    )
+    if msg['type'] == 'started_music':
+        await rpc.update(
+            large_image=msg['data']['thumbnail'],
+            large_text="ytm-discord-rpc",
+            small_image='ytmusic',
+            state="by " + msg['data']['singer'],
+            details=msg['data']['title'],
+            buttons=[
+                {'label': 'Play on YouTube Music', 'url': msg['data']['url']}
+            ]
+        )
+    else:
+        await rpc.clear()
 
 async def handler(ws):
     global rpc
-    
+
     print("New connection established.")
     connections.append(ws)
 
@@ -38,7 +41,7 @@ async def handler(ws):
     try:
         async for msg in ws:
             print(msg)
-            await update_presence(rpc, json.loads(msg)['data'])
+            await update_presence(rpc, json.loads(msg))
 
     except websockets.exceptions.ConnectionClosed:
         for conn in connections:
@@ -67,7 +70,7 @@ p = pystray.Icon(
     Image.open("ytmusic.png"),
     menu=pystray.Menu(
         pystray.MenuItem("Running on background", action=None, enabled=False),
-        pystray.MenuItem("Exit", action=lambda: exit())
+        pystray.MenuItem("Exit", action=lambda: os._exit(1))
     )
 )
 
