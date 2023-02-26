@@ -1,0 +1,3 @@
+pypresence
+websockets
+pillow
