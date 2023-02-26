@@ -13,12 +13,14 @@ async def update_presence(rpc, msg):
     if msg['type'] == 'started_music':
         await rpc.update(
             large_image=msg['data']['thumbnail'],
-            large_text="ytm-discord-rpc",
+            large_text=msg['data']['title'],
             small_image='ytmusic',
+            small_text='YouTube Music',
             state="by " + msg['data']['singer'],
             details=msg['data']['title'],
             buttons=[
-                {'label': 'Play on YouTube Music', 'url': msg['data']['url']}
+                {'label': 'Play on YouTube Music', 'url': msg['data']['url']},
+                {'label': 'Try ytm-discord-rpc', 'url': 'https://github.com/lareithen/ytm-discord-rpc'}
             ]
         )
     else:
