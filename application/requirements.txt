@@ -1,3 +1,4 @@
 pypresence
 websockets
 pillow
+pystray
