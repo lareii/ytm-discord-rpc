@@ -6,7 +6,6 @@ import json
 import pystray
 import threading
 from PIL import Image
-import time
 
 connections = []
 
