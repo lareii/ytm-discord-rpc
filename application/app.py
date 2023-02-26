@@ -21,7 +21,9 @@ async def update_presence(rpc, msg):
         ]
     )
 
-async def handler(ws, *, rpc):
+async def handler(ws):
+    global rpc
+    
     print("New connection established.")
     connections.append(ws)
 
@@ -47,15 +49,18 @@ async def handler(ws, *, rpc):
         print("Disconnected.")
 
 async def run():
-    rpc = pypresence.AioPresence(client_id="984883198959943790")
+    global rpc
+
     await rpc.connect()
     
     async with websockets.serve(
-        functools.partial(handler, rpc=rpc),
+        handler,
         "localhost", 
         5675
     ):
         await asyncio.Future()
+
+rpc = pypresence.AioPresence(client_id="984883198959943790")
 
 p = pystray.Icon(
     'test',
