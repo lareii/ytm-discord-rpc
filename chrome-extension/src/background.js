@@ -23,9 +23,12 @@ chrome.tabs.onCreated.addListener(async (tab) => {
     await chrome.storage.sync.set({tabId: tab.id});
 
     socket.send(JSON.stringify({
-        type: "new_music",
+        type: "started_music",
         data: {
-            title: youtubeResult.title
+            title: youtubeResult.title,
+            thumbnail: youtubeResult.thumbnail_url,
+            singer: youtubeResult.author_name,
+            url: tab.pendingUrl
         }
     }));
 });
@@ -40,7 +43,7 @@ chrome.tabs.onRemoved.addListener(async (tabId) => {
     if (musicTab.tabId !== tabId) return;
 
     socket.send(JSON.stringify({
-        type: "stop_music",
+        type: "stopped_music",
         data: {}
     }));
 
@@ -58,18 +61,19 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
 
     if (changeInfo.audible === false) {
         socket.send(JSON.stringify({
-            type: "stop_music",
+            type: "stopped_music",
             data: {}
         }));
     }
 
     if (changeInfo.audible === true) {
         socket.send(JSON.stringify({
-            type: "start_music",
+            type: "started_music",
             data: {
                 title: youtubeResult.title,
                 thumbnail: youtubeResult.thumbnail_url,
-                singer: youtubeResult.author_name
+                singer: youtubeResult.author_name,
+                url: tab.url
             }
         }));
     }
@@ -79,11 +83,12 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
         if (!regex.test(youtubeResult.title)) return;
 
         socket.send(JSON.stringify({
-            type: "start_music",
+            type: "started_music",
             data: {
                 title: youtubeResult.title,
                 thumbnail: youtubeResult.thumbnail_url,
-                singer: youtubeResult.author_name
+                singer: youtubeResult.author_name,
+                url: tab.url
             }
         }));
     }
