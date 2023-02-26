@@ -5,9 +5,9 @@
 Set your Discord RPC with YouTube music status.
 
 ## Features
-* bla
-* bla
-* bla
+* Real-time sync between Discord and Youtube Music.
+* Low resource usage.
+* Free & open-source.
 
 ## Installation & Usage
 ```
