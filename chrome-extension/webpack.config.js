@@ -10,7 +10,6 @@ var options = {
   mode: process.env.NODE_ENV || "development",
   entry: {
     popup: path.join(__dirname, "src", "popup.js"),
-    background: path.join(__dirname, "src", "background.js"),
     content: path.join(__dirname, "src", "content.js"),
   },
   output: {
@@ -64,10 +63,6 @@ var options = {
               )
             );
           },
-        },
-        {
-          from: "src/background-wrapper.js",
-          to: path.join(__dirname, "dist"),
         },
         {
           from: "src/pages",

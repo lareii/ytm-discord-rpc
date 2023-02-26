@@ -5,18 +5,17 @@
     "default_popup": "popup.html",
     "default_title": "Open"
   },
-  "background": {
-    "service_worker": "background-wrapper.js"
-  },
   "content_scripts": [
     {
-      "matches": ["https://google.com/*"],
+      "matches": ["https://music.youtube.com/*"],
+      "match_origin_as_fallback": true,
       "js": ["content.bundle.js"]
     }
   ],
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'"
+    "extension_pages": "script-src 'self'; object-src 'self'",
+    "page": "script-src 'self' https://music.youtube.com; object-src 'self'"
   },
-  "permissions": ["tabs","storage"],
+  "permissions": ["tabs","storage","scripting"],
   "host_permissions": ["https://google.com/"]
 }
