@@ -74,23 +74,13 @@ if (document.location.href.includes('music.youtube')) {
 
             const thumbnail = document.getElementsByClassName("image style-scope ytmusic-player-bar");
             const singer = song?.getElementsByClassName("byline style-scope ytmusic-player-queue-item");
-            const duration = document.getElementsByClassName("time-info style-scope ytmusic-player-bar");
             const url = document.getElementsByClassName("ytp-title-link yt-uix-sessionlink");
-
-            const timeString = duration[0].textContent;
-            const timeArray = timeString.trim().split('/');
-            const currentTime = timeArray[0].trim();
-            const totalTime = timeArray[1].trim();
 
             data = {
                 title: name.textContent,
                 url: url[0].href,
                 thumbnail: thumbnail[0].src,
                 singer: singer[0].textContent,
-                duration: {
-                    current: currentTime,
-                    total: totalTime,
-                }
             }
         }
 
