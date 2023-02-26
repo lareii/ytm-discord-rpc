@@ -90,7 +90,6 @@ if (document.location.href.includes('music.youtube')) {
                 duration: {
                     current: currentTime,
                     total: totalTime,
-                    epoch: showAsEpoch(totalTime, currentTime)
                 }
             }
         }
@@ -99,18 +98,5 @@ if (document.location.href.includes('music.youtube')) {
             type: type,
             data: data
         }));
-    }
-
-    function showAsEpoch(fullDurationStr, currentDurationStr) {
-        const fullDurationArr = fullDurationStr.split(":");
-        const fullDuration = parseInt(fullDurationArr[0]) * 60 + parseInt(fullDurationArr[1]);
-
-        const currentDurationArr = currentDurationStr.split(":");
-        const currentDuration = parseInt(currentDurationArr[0]) * 60 + parseInt(currentDurationArr[1]);
-
-        const difference = fullDuration - currentDuration;
-        const epoch = Date.now() + (difference * 1000);
-
-        return epoch;
     }
 }
