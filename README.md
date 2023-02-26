@@ -11,7 +11,7 @@ Set your Discord RPC with YouTube music status.
 
 ## Installation & Usage
 ```
-> git clone [htt](https://github.com/lareithen/ytm-discord-rpc.git
+> git clone https://github.com/lareithen/ytm-discord-rpc.git
 > cd ytm-discord-rpc
 ```
 
