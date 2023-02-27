@@ -21,16 +21,17 @@ async def update_presence(rpc, msg):
             buttons=[
                 {'label': 'Play on YouTube Music', 'url': msg['data']['url']},
                 {'label': 'Try ytm-discord-rpc', 'url': 'https://github.com/lareithen/ytm-discord-rpc'}
-            ]
+            ],
         )
     else:
         await rpc.clear()
 
 async def handler(ws):
-    global rpc
+    global rpc, p
 
     print("New connection established.")
     connections.append(ws)
+    p.notify(message='Connected to extension.', title='ytm-discord-rpc')
 
     if len(connections) > 1:  # checks if one or more connection
         for conn in connections[:len(connections) - 1]:
@@ -50,7 +51,8 @@ async def handler(ws):
             await conn.close()
 
         connections.clear()
-        await rpc.clear(  )
+        await rpc.clear()
+        p.notify(message='Disconnected from extension.', title='ytm-discord-rpc')
         print("Disconnected.")
 
 async def run():
@@ -65,10 +67,10 @@ async def run():
     ):
         await asyncio.Future()
 
-rpc = pypresence.AioPresence(client_id="984883198959943790")
+rpc = pypresence.AioPresence(client_id="984883198959943790") # do not change this
 
 p = pystray.Icon(
-    'test',
+    "ytm-discord-rpc",
     Image.open("ytmusic.png"),
     menu=pystray.Menu(
         pystray.MenuItem("Running on background", action=None, enabled=False),
