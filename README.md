@@ -2,7 +2,9 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 # YouTube Music Discord RPC
-Set your Discord RPC with YouTube music status.
+Set your Discord RPC with YouTube music status.\
+\
+![image](https://user-images.githubusercontent.com/72984140/221476114-6298fa56-be38-4f90-b6f9-fddd1245d28c.png)
 
 ## Features
 * Real-time sync between Discord and Youtube Music.
