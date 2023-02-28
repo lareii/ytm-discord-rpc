@@ -46,20 +46,22 @@ if (document.location.href.includes('music.youtube')) {
         }
     });
 
+    const array = ["Pause", "Duraklat", "Pausa", "Pausie"]
+
     function checkContent() {
         const playButton = document.getElementById('play-pause-button');
 
-        if (name.textContent !== previousContent && playButton.getAttribute('title') === 'Pause') {
+        if (name.textContent !== previousContent && array.includes(playButton.getAttribute('title'))) {
             previousContent = name.textContent;
             sendMessage('started_music');
         }
 
-        if (name.textContent === previousContent && playButton.getAttribute('title') === 'Pause') {
+        if (name.textContent === previousContent && array.includes(playButton.getAttribute('title'))) {
             sendMessage('started_music');
             paused = false;
         }
 
-        if (!paused && name.textContent === previousContent && playButton.getAttribute('title') === 'Play') {
+        if (!paused && name.textContent === previousContent && !array.includes(playButton.getAttribute('title'))) {
             sendMessage('stopped_music', false);
             paused = true;
         }
