@@ -6,6 +6,7 @@ import json
 import pystray
 import threading
 from PIL import Image
+from urllib.request import urlopen
 
 connections = []
 
@@ -69,9 +70,11 @@ async def run():
 
 rpc = pypresence.AioPresence(client_id="984883198959943790") # do not change this
 
+icon = "https://raw.githubusercontent.com/lareithen/ytm-discord-rpc/master/assets/ytmusic.png"
+
 p = pystray.Icon(
     "ytm-discord-rpc",
-    Image.open("ytmusic.png"),
+    Image.open(urlopen(icon)),
     menu=pystray.Menu(
         pystray.MenuItem("Running on background", action=None, enabled=False),
         pystray.MenuItem("Exit", action=lambda: os._exit(1))
